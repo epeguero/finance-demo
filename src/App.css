@@ -45,14 +45,10 @@ body {
   }
 
   .large-logo {
-    opacity: 0;
     max-width: 0;
     grid-row: 1;
     grid-column: 1;
-    transition: opacity 200ms linear, max-width 300ms ease-in-out 200ms;
-    /* @starting-style {
-      opacity: 1;
-    } */
+    transition: max-width 300ms ease-in-out 200ms;
   }
 
   .overview-icon, .transactions-icon, .budgets-icon, .pots-icon, .recurring-bills-icon {
@@ -71,12 +67,9 @@ body {
 .sidebar[data-maximized="true"] {
   padding: 0 150px 0 30px;
   .large-logo {
-    transition: max-width 350ms ease-in-out, opacity 200ms ease-in-out 300ms;
+    transition: max-width 350ms ease-in-out;
     max-width: 130px;
     opacity: 1;
-    /* @starting-style {
-      max-width: 0px;
-    } */
   }
   .maximize-button {
     transform: rotate(0turn);
