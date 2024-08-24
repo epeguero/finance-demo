@@ -65,7 +65,7 @@ body {
     max-width: 0;
     grid-row: 1;
     grid-column: 1;
-    transition: max-width 300ms ease-in-out 200ms;
+    transition: max-width 700ms ease-in-out;
   }
 
   .sidebar-item > span {
@@ -102,6 +102,10 @@ body {
 
   .sidebar-item[data-selected="true"] {
     path {fill: darkgreen;}
+  }
+
+  .sidebar-item[data-selected="false"] {
+    span {opacity: 0;}
   }
 }
 
