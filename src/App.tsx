@@ -20,22 +20,38 @@ type Pot = {
 function App() {
   return (
     <div className="App">
-      <Sidebar/>
+      <Sidebar currentPage={'overview'}/>
       <Overview/>
     </div>
   );
 }
 
-const Sidebar = () => {
+type Page = 'overview' | 'transactions' | 'budgets' | 'pots' | 'recurring-bills';
+const Sidebar = ({currentPage}: {currentPage: Page}) => {
   const [isMaximized, setIsMaximized] = useState(false);
   return <div className='sidebar' data-maximized={isMaximized}>
     <LogoSmallIcon className='small-logo'/>
     <LogoLargeIcon className='large-logo'/>
-    <OverviewIcon className='overview-icon'/>
-    <TransactionsIcon className='transactions-icon'/>
-    <BudgetsIcon className='budgets-icon'/>
-    <PotsIcon className='pots-icon'/>
-    <RecurringBillsIcon className='recurring-bills-icon'/>
+    <div className='sidebar-item' data-selected={currentPage === 'overview'}>
+      <OverviewIcon className='overview-icon' />
+      <span>Overview</span>
+    </div>
+    <div className='sidebar-item' data-selected={currentPage === 'transactions'}>
+      <TransactionsIcon className='transactions-icon' />
+      <span>Transactions</span>
+    </div>
+    <div className='sidebar-item' data-selected={currentPage === 'budgets'}>
+      <BudgetsIcon className='budgets-icon' />
+      <span>Budgets</span>
+    </div>
+    <div className='sidebar-item' data-selected={currentPage === 'pots'}>
+      <PotsIcon className='pots-icon' />
+      <span>Pots</span>
+    </div>
+    <div className='sidebar-item' data-selected={currentPage === 'recurring-bills'}>
+      <RecurringBillsIcon className='recurring-bills-icon' />
+      <span>Recurring Bills</span>
+    </div>
     <MaxMinimizeButton onClick={() => setIsMaximized(!isMaximized)}/>
   </div>
 }
@@ -109,8 +125,8 @@ const CaretLink = ({title, className}: {title: string} & React.HTMLAttributes<HT
     <CaretRightIcon/>
   </div>
 
-const MaxMinimizeButton = ({onClick}: React.ComponentProps<"div">) =>
-  <div className='maximize-button' onClick={onClick}>
+const MaxMinimizeButton = ({onClick, className, ...divProps}: React.ComponentProps<"div">) =>
+  <div className={`${className} maximize-button`} onClick={onClick} {...divProps}>
     <LeftArrowIcon/>
   </div>
 
