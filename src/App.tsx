@@ -126,7 +126,7 @@ const CaretLink = ({title, className}: {title: string} & React.HTMLAttributes<HT
   </div>
 
 const MaxMinimizeButton = ({onClick, className, ...divProps}: React.ComponentProps<"div">) =>
-  <div className={`${className} maximize-button`} onClick={onClick} {...divProps}>
+  <div className={`${className ?? ''} maximize-button`} onClick={onClick} {...divProps}>
     <LeftArrowIcon/>
   </div>
 
