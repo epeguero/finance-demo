@@ -32,16 +32,15 @@
 
 .amount-with-label {
   display: grid;
-  grid-template: 1fr 1fr / min-content 1fr;
+  grid-template: min-content min-content / min-content 1fr;
   column-gap: 15px;
-  align-items: center;
   white-space: nowrap;
 
   .colorbar {
     grid-column: 1 / span 1;
     grid-row: 1 / span 2;
     width: 4px;
-    height: 80%;
+    height: 100%;
     border-radius: 1rem;
   }
 
@@ -50,12 +49,16 @@
     grid-row: 1 / span 1;
     font-size: 0.6rem;
     color: grey;
+    padding-bottom: 5px;
+    margin-top: 2px;
+    margin-bottom: 2px;
   }
   >span:nth-of-type(2) {
     grid-column: 2 / span 1;
     grid-row: 2 / span 1;
     font-size: 0.7rem;
     font-weight: bold;
+    padding-bottom: 2px;
   }
 }
 
@@ -65,4 +68,49 @@
   border-top-width: 1px;
   border-top-style: solid;
   margin: 18px 0 18px 0;
+}
+
+.pie-chart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  position: relative;
+  width: 200px;
+  height: 200px;
+  background-color: rgb(130, 201, 215);
+  border-radius: 100%;
+
+  span {
+    position: relative;
+    z-index: 1;
+  }
+
+  span:nth-of-type(1) {
+    font-size: 1.7rem;
+    font-weight: bold;
+  }
+
+  span:nth-of-type(2) {
+    font-size: 0.6rem;
+    color: grey;
+    font-weight: lighter;
+  }
+}
+
+.pie-chart::before {
+  display: block;
+  content: '';
+  position: absolute;
+  width: 75%;
+  height: 75%;
+  border-radius: 100%;
+  top: 12.5%;
+  left: 12.5%;
+  background: radial-gradient(
+    circle,
+    white 0% 60%,
+    rgb(255, 255, 255, 0.5) 60% 100%
+  );
 }

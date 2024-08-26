@@ -1,6 +1,6 @@
-import { AmountWithLabel, Card, CardHeader, CaretLink, Divider, formatCurrency } from "../utility/Utility";
+import { AmountWithLabel, Card, CardHeader, CaretLink, Divider, PieChart, formatCurrency } from "../utility/Utility";
 import { ReactComponent as PotIcon } from '../../assets/images/icon-pot.svg';
-import { Pot, Transaction } from "../../types/types";
+import { Budget, Pot, Transaction } from "../../types/types";
 import { format } from "date-fns";
 
 import './Overview.css';
@@ -12,6 +12,13 @@ export const Overview = () => {
     {name: 'Gift', color: 'paleturquoise', size: 40},
     {name: 'New Laptop', color: 'moccasin', size: 10}
   ];
+
+  const budgets: Budget[] = [
+    {category: 'Entertainment', remaining: 15, max: 50, color: 'darkgreen'},
+    {category: 'Bills', remaining: 150, max: 750, color: 'paleturquoise'},
+    {category: 'Dining Out', remaining: 133, max: 75, color: 'moccasin'},
+    {category: 'Personal Care', remaining: 40, max: 100,color: 'dimgrey'}
+  ]
 
   const transactions: Transaction[] = [
     {
@@ -43,7 +50,7 @@ export const Overview = () => {
       category: 'Dining Out',
       transactionDate: new Date(),
       amount: -65.00
-    },
+    }
   ];
 
   return (
@@ -71,6 +78,8 @@ export const Overview = () => {
         </Card>
         <Card className="budgets">
           <CardHeader title="Budgets" actionButton={<CaretLink title="See Details"/>}/>
+          <PieChart budgets={budgets}/>
+          {budgets.map((b, ix) => <AmountWithLabel key={`budgets-budget-${ix}`} label={b.category} amount={b.max} color={b.color} cents/>)} 
         </Card>
         <Card className="recurring-bills">
           <CardHeader title="Recurring Bills" actionButton={<CaretLink title="See Details"/>}/>

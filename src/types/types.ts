@@ -12,3 +12,10 @@ export type Transaction = {
   transactionDate: Date,
   amount: number;
 }
+
+export type Budget = {
+  category: string,
+  remaining: number,
+  max: number,
+  color: string
+}
