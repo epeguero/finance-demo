@@ -20,9 +20,9 @@
 
 .caret-link {
   display: flex;
-  gap: 20px;
+  gap: 15px;
   align-items: center;
-  font-size: 0.775rem;
+  font-size: 0.7rem;
   color: grey;
   >svg {
     width: 8px;
@@ -35,6 +35,7 @@
   grid-template: 1fr 1fr / min-content 1fr;
   column-gap: 15px;
   align-items: center;
+  white-space: nowrap;
 
   .colorbar {
     grid-column: 1 / span 1;
@@ -47,7 +48,7 @@
   >span:nth-of-type(1) {
     grid-column: 2 / span 1;
     grid-row: 1 / span 1;
-    font-size: 0.65rem;
+    font-size: 0.6rem;
     color: grey;
   }
   >span:nth-of-type(2) {
