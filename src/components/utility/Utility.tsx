@@ -41,8 +41,23 @@ export const PieChart = ({budgets}:{budgets: Budget[]}) => {
 
   // e.g.:
   //"conic-gradient(green 0deg 20deg, lightblue 20deg 200deg, rgb(242, 205, 172) 200deg 240deg, rgb(98, 96, 112) 240deg 360deg)"
+
   return (
-  <div className='pie-chart' style={{background:`conic-gradient(${conicSegments.join(', ')})`}}>
+  <div 
+    className='pie-chart budget-indicator' 
+    style={
+      {
+        background:`
+        radial-gradient(
+          circle at center,
+          white 0% 45%,
+          rgba(255, 255, 255, 0.5) 45% 52%,
+          transparent 52% 100%
+        ),
+        conic-gradient(${conicSegments.join(', ')})
+        `
+      }
+    }>
     <span>{formatCurrency(budgetRemaining)}</span>
     <span>of {formatCurrency(budgetAllocated)} limit</span>
   </div>)
