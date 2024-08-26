@@ -33,12 +33,11 @@ export const PieChart = ({budgets}:{budgets: Budget[]}) => {
   const budgetSegments = budgets.map(b => b.max / budgetAllocated * 360);
   const conicSegments = budgetSegments.reduce(
     (acc, b, ix) => ({
-      prevSegment: b,
-      conicSegments: [...acc.conicSegments, `${budgets[ix].color} ${acc.prevSegment}deg ${budgetSegments[ix]}deg`]
+      accumSegments: acc.accumSegments + b,
+      conicSegments: [...acc.conicSegments, `${budgets[ix].color} ${acc.accumSegments}deg ${acc.accumSegments+ b}deg`]
     }), 
-    {prevSegment: 0, conicSegments: [] as string[]}
+    {accumSegments: 0, conicSegments: [] as string[]}
   ).conicSegments;
-  console.log(conicSegments)
 
   // e.g.:
   //"conic-gradient(green 0deg 20deg, lightblue 20deg 200deg, rgb(242, 205, 172) 200deg 240deg, rgb(98, 96, 112) 240deg 360deg)"
