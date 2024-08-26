@@ -3,6 +3,8 @@ import { ReactComponent as PotIcon } from '../../assets/images/icon-pot.svg';
 import { Pot, Transaction } from "../../types/types";
 import { format } from "date-fns";
 
+import './Overview.css';
+
 export const Overview = () => {
   const pots: Pot[] = [
     {name: 'Savings', color: 'darkgreen', size: 159},
@@ -23,7 +25,25 @@ export const Overview = () => {
       category: 'Dining Out',
       transactionDate: new Date(),
       amount: -55.50
-    }
+    },
+    // {
+    //   party: 'Savory Bites Bistro', 
+    //   category: 'Dining Out',
+    //   transactionDate: new Date(),
+    //   amount: -55.50
+    // },
+    // {
+    //   party: 'Savory Bites Bistro', 
+    //   category: 'Dining Out',
+    //   transactionDate: new Date(),
+    //   amount: -55.50
+    // },
+    // {
+    //   party: 'Savory Bites Bistro', 
+    //   category: 'Dining Out',
+    //   transactionDate: new Date(),
+    //   amount: -55.50
+    // },
   ];
 
   return (
@@ -79,6 +99,6 @@ const TransactionEntry = ({transaction}: {transaction: Transaction}) =>
       }
     />
     <span>{transaction.party}</span>
-    <span className={transaction.amount > 0 ? 'positive-amount' : ''}>{transaction.amount > 0 ? '+' : '-'}{formatCurrency(transaction.amount, true)}</span>
+    <span className={transaction.amount > 0 ? 'positive-amount' : ''}>{transaction.amount > 0 ? '+' : ''}{formatCurrency(transaction.amount, true)}</span>
     <span>{format(transaction.transactionDate, 'd MMM y')}</span>
   </div>
