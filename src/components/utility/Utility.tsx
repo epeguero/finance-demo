@@ -1,4 +1,5 @@
 import { ReactComponent as CaretRightIcon } from '../../assets/images/icon-caret-right.svg';
+import './Utility.css';
 
 export const AmountWithLabel = ({label, amount, cents=false, color, className, ...divProps}: {label: string, amount: number, cents?: boolean, color: string} & React.HTMLAttributes<HTMLDivElement>) => 
   <div className={`amount-with-label ${className}`} {...divProps}>
@@ -21,6 +22,8 @@ export const CaretLink = ({title, className}: {title: string} & React.HTMLAttrib
     <span>{title}</span>
     <CaretRightIcon/>
   </div>
+
+export const Divider = () => <div className='divider'/>
 
 export const formatCurrency = (value: number, cents: boolean = false) =>
   value.toLocaleString('en-US', {

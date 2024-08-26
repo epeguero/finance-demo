@@ -1,4 +1,4 @@
-import { AmountWithLabel, Card, CardHeader, CaretLink, formatCurrency } from "../utility/Utility";
+import { AmountWithLabel, Card, CardHeader, CaretLink, Divider, formatCurrency } from "../utility/Utility";
 import { ReactComponent as PotIcon } from '../../assets/images/icon-pot.svg';
 import { Pot, Transaction } from "../../types/types";
 import { format } from "date-fns";
@@ -47,7 +47,7 @@ export const Overview = () => {
         </Card>
         <Card className="transactions">
           <CardHeader title="Transactions" actionButton={<CaretLink title="View All"/>}/>
-          {transactions.map(t => <TransactionEntry transaction={t}/>).flatMap(t => [<>divider</>, t]).slice(1)}
+          {transactions.map(t => <TransactionEntry transaction={t}/>).flatMap(t => [<Divider/>, t]).slice(1)}
         </Card>
         <Card className="budgets">
           <CardHeader title="Budgets" actionButton={<CaretLink title="See Details"/>}/>

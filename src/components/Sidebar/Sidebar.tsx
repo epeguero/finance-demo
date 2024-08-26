@@ -10,6 +10,8 @@ import { ReactComponent as PotsIcon} from '../../assets/images/icon-nav-pots.svg
 import { ReactComponent as RecurringBillsIcon} from '../../assets/images/icon-nav-recurring-bills.svg';
 import { ReactComponent as LeftArrowIcon } from '../../assets/images/icon-minimize-menu.svg';
 
+import './Sidebar.css';
+
 export const Sidebar = ({currentPage}: {currentPage: Page}) => {
   const [isMaximized, setIsMaximized] = useState(false);
   return <div className='sidebar' data-maximized={isMaximized}>
