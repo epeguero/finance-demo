@@ -3,7 +3,7 @@
   flex-direction: column;
   background-color: white;
   border-radius: .75rem;
-  padding: 1.75rem 1.5rem 1.75rem 1.5rem;
+  padding: 1.5rem 1.5rem 1.5rem 1.5rem;
 }
 
 .card-header {
@@ -11,9 +11,9 @@
   justify-content: space-between;
   align-items: center;
   height: min-content;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   >span:nth-of-type(1) { 
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: bold;
   }
 }
@@ -40,7 +40,7 @@
     grid-column: 1 / span 1;
     grid-row: 1 / span 2;
     width: 4px;
-    height: 45px;
+    height: 80%;
     border-radius: 1rem;
   }
 
@@ -63,5 +63,5 @@
   border-top-color: whitesmoke;
   border-top-width: 1px;
   border-top-style: solid;
-  margin: 25px 0 25px 0;
+  margin: 18px 0 18px 0;
 }

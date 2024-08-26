@@ -26,24 +26,24 @@ export const Overview = () => {
       transactionDate: new Date(),
       amount: -55.50
     },
-    // {
-    //   party: 'Savory Bites Bistro', 
-    //   category: 'Dining Out',
-    //   transactionDate: new Date(),
-    //   amount: -55.50
-    // },
-    // {
-    //   party: 'Savory Bites Bistro', 
-    //   category: 'Dining Out',
-    //   transactionDate: new Date(),
-    //   amount: -55.50
-    // },
-    // {
-    //   party: 'Savory Bites Bistro', 
-    //   category: 'Dining Out',
-    //   transactionDate: new Date(),
-    //   amount: -55.50
-    // },
+    {
+      party: 'Daniel Carter', 
+      category: '',
+      transactionDate: new Date(),
+      amount: -42.30
+    },
+    {
+      party: 'Sun Park', 
+      category: '',
+      transactionDate: new Date(),
+      amount: 120
+    },
+    {
+      party: 'Urban Services Hub', 
+      category: 'Dining Out',
+      transactionDate: new Date(),
+      amount: -65.00
+    },
   ];
 
   return (
@@ -82,8 +82,7 @@ export const Overview = () => {
 const Figure = ({title, figure, className}: {title: string, figure: number} & React.ComponentProps<typeof Card>) =>
   <Card className={`${className ?? ''} figure`}>
     <span> {title} </span>
-    <br/>
-    <span> {formatCurrency(figure)} </span>
+    <span> {formatCurrency(figure, true)} </span>
   </Card>
 
 const TransactionEntry = ({transaction}: {transaction: Transaction}) =>
