@@ -1,4 +1,6 @@
 .sidebar{
+  --slide-duration: 400ms;
+
   display: grid;
   grid-template-columns: 100px;
   grid-auto-rows: min-content;
@@ -7,9 +9,10 @@
   border-top-right-radius: 1rem;
   border-bottom-right-radius: 1rem;
 
-  transition: grid-template-columns 700ms cubic-bezier(.74,1.12,.54,1.06);
+  transition: grid-template-columns var(--slide-duration) cubic-bezier(.74,1.12,.54,1.06);
 
   .sidebar-item {
+    position: relative;
     display: flex;
     gap: 15px;
     padding: 17px 0px 17px 40px;
@@ -40,7 +43,7 @@
     max-width: 0;
     grid-row: 1;
     grid-column: 1;
-    transition: max-width 700ms ease-in-out;
+    transition: max-width var(--slide-duration) ease-in-out;
   }
 
   .sidebar-item > span {
@@ -55,12 +58,31 @@
     border-left: 5px solid transparent;
     transition: transform 500ms cubic-bezier(.74,1.12,.54,1.06);
     transform-origin: 200% 200%;
+    path {
+      transition: fill ease-in-out 200ms;
+    }
+  }
+
+  .maximize-button:hover {
+    path {fill: white;}
   }
 }
 
 .sidebar[data-maximized="false"] {
   .maximize-button {
     transform: rotate(-0.5turn) translate(300%, 300%);
+  }
+  .sidebar-item[data-selected="true"]::before {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 10px;
+    opacity: 0;
+    left: 0px;
+    top: 0px;
+    background-color: darkgreen;
+    animation: var(--slide-duration) cubic-bezier(.74,1.12,.54,1.06) driftIn;
+    /* background: linear-gradient(to left, darkgreen, white); */
   }
 }
 
@@ -83,5 +105,42 @@
 
   .sidebar-item[data-selected="false"] {
     span {opacity: 0;}
+  }
+
+  .sidebar-item[data-selected="true"]::before {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 0;
+    opacity: 0;
+    left: 0px;
+    top: 0px;
+    background-color: darkgreen;
+    animation: var(--slide-duration) cubic-bezier(.74,1.12,.54,1.06) driftOut;
+    /* background: linear-gradient(to left, darkgreen, white); */
+  }
+}
+
+@keyframes driftOut {
+  0% {
+    opacity: 0.5;
+    width: 0px;
+  }
+
+  100% {
+    opacity: 0;
+    width: 10px;
+  }
+}
+
+@keyframes driftIn {
+  0% {
+    opacity: 0;
+    width: 10px;
+  }
+
+  100% {
+    opacity: 0.5;
+    width: 0;
   }
 }

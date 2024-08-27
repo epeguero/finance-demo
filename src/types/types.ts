@@ -21,7 +21,7 @@ export type Budget = {
 }
 
 export type BillsSummary = {
-  paid: number;
-  totalUpcoming: number;
-  dueSoon: number;
+  "Paid": number;
+  "Total Upcoming": number;
+  "Due Soon": number;
 }

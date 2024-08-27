@@ -54,9 +54,9 @@ export const Overview = () => {
   ];
 
   const billsSummary: BillsSummary = {
-    paid: 190,
-    totalUpcoming: 194.98,
-    dueSoon: 59.98,
+    "Paid": 190,
+    "Total Upcoming": 194.98,
+    "Due Soon": 59.98,
   }
 
   return (
@@ -89,10 +89,10 @@ export const Overview = () => {
         </Card>
         <Card className="recurring-bills">
           <CardHeader title="Recurring Bills" actionButton={<CaretLink title="See Details"/>}/>
-          {Object.keys(billsSummary).map((x: string) => 
+          {Object.keys(billsSummary).map((billCategory: string) => 
             <Card>
-              <span>Paid Bills</span>
-              <span>{formatCurrency(billsSummary[x as keyof BillsSummary], true)}</span>
+              <span>{billCategory}</span>
+              <span>{formatCurrency(billsSummary[billCategory as keyof BillsSummary], true)}</span>
             </Card>
           )}
         </Card>
