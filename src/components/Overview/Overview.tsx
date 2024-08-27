@@ -1,6 +1,6 @@
 import { AmountWithLabel, Card, CardHeader, CaretLink, Divider, PieChart, formatCurrency } from "../utility/Utility";
 import { ReactComponent as PotIcon } from '../../assets/images/icon-pot.svg';
-import { Budget, Pot, Transaction } from "../../types/types";
+import { BillsSummary, Budget, Pot, Transaction } from "../../types/types";
 import { format } from "date-fns";
 
 import './Overview.css';
@@ -53,6 +53,12 @@ export const Overview = () => {
     }
   ];
 
+  const billsSummary: BillsSummary = {
+    paid: 190,
+    totalUpcoming: 194.98,
+    dueSoon: 59.98,
+  }
+
   return (
     <div className="overview">
         <span className="overview-title">Overview</span>
@@ -83,6 +89,12 @@ export const Overview = () => {
         </Card>
         <Card className="recurring-bills">
           <CardHeader title="Recurring Bills" actionButton={<CaretLink title="See Details"/>}/>
+          {Object.keys(billsSummary).map((x: string) => 
+            <Card>
+              <span>Paid Bills</span>
+              <span>{formatCurrency(billsSummary[x as keyof BillsSummary], true)}</span>
+            </Card>
+          )}
         </Card>
       </div>
   );

@@ -1,6 +1,4 @@
 .overview {
-  box-sizing: border-box;
-  height: 100%;
   display: grid;
   grid-template-columns: var(--left-column-width) 1fr;
   grid-template-rows: min-content min-content 170px minmax(auto, 0.5fr) minmax(auto, 1fr);
@@ -156,15 +154,16 @@
   .budgets {
     display: grid;
     grid-template-columns: 1fr min-content;
-    grid-auto-flow: column dense;
     grid-auto-rows: minmax(min-content, 1fr);
     grid-row: 3 / span 2;
     grid-column: 2 / span 1;
+    column-gap: 10px;
     
     .card-header {
       grid-row: 1 / span 1;
       grid-column: 1 / span 2;
     }
+
     .pie-chart {
       grid-row: 2 / span 4;
       grid-column: 1 / span 1;
@@ -173,7 +172,43 @@
   }
 
   .recurring-bills {
+    display: grid;
+    grid-template-rows: min-content;
+    grid-auto-rows: 1fr;
     grid-row: 5 / span 1;
     grid-column: 2 / span 1;
+    row-gap: 10px;
+
+    .card {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+
+      background-color: rgb(248, 244, 240);
+      border-left-width: 4px;
+      border-left-style: solid;
+      border-radius: 0.5rem;
+
+      padding: 1.2rem 0.75rem 1.2rem 0.75rem;
+
+      font-size: 0.7rem;
+      span:nth-of-type(1) {
+        color: grey;
+      }
+      span:nth-of-type(2) {
+        font-weight: bold;
+      }
+    }
+
+    .card:nth-child(2) {
+      border-left-color: darkgreen;
+    }
+    .card:nth-child(3) {
+      border-left-color: moccasin;
+    }
+    .card:nth-child(4) {
+      border-left-color: paleturquoise;
+    }
   }
 }

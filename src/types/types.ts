@@ -19,3 +19,9 @@ export type Budget = {
   max: number,
   color: string
 }
+
+export type BillsSummary = {
+  paid: number;
+  totalUpcoming: number;
+  dueSoon: number;
+}
