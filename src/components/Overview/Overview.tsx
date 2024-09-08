@@ -9,14 +9,16 @@ import {
   formatCurrency,
 } from "../utility/Utility";
 import { ReactComponent as PotIcon } from "../../assets/images/icon-pot.svg";
-import { BillsSummary } from "../../types/types";
+import { BillsSummary, Page } from "../../types/types";
 
 import "./Overview.css";
 import { useFinancials } from "../../hooks/useFinancials";
 import { TransactionEntry } from "../Transactions/TransactionEntry";
+import { useNavigationContext } from "../../hooks/Navigation";
 
 export const Overview = (): JSX.Element => {
   const { pots, budgets, transactions, billsSummary } = useFinancials();
+  const { navigate } = useNavigationContext();
   return (
     <div className="overview">
       <span className="overview-title">Overview</span>
@@ -32,7 +34,12 @@ export const Overview = (): JSX.Element => {
       <Card className="pots">
         <CardHeader
           title="Pots"
-          actionButton={<CaretLink title="See Details" />}
+          actionButton={
+            <CaretLink
+              title="See Details"
+              onClick={() => navigate(Page.Pots)}
+            />
+          }
         />
         <Card className="total-saved">
           <PotIcon />
@@ -54,7 +61,12 @@ export const Overview = (): JSX.Element => {
       <Card className="transactions">
         <CardHeader
           title="Transactions"
-          actionButton={<CaretLink title="View All" />}
+          actionButton={
+            <CaretLink
+              title="View All"
+              onClick={() => navigate(Page.Transactions)}
+            />
+          }
         />
         <div className="transactions-list">
           <Intersperse Separator={Divider}>
@@ -67,7 +79,12 @@ export const Overview = (): JSX.Element => {
       <Card className="budgets">
         <CardHeader
           title="Budgets"
-          actionButton={<CaretLink title="See Details" />}
+          actionButton={
+            <CaretLink
+              title="See Details"
+              onClick={() => navigate(Page.Budgets)}
+            />
+          }
         />
         <PieChart budgets={budgets} />
         {budgets.map((b, ix) => (
@@ -83,7 +100,12 @@ export const Overview = (): JSX.Element => {
       <Card className="recurring-bills">
         <CardHeader
           title="Recurring Bills"
-          actionButton={<CaretLink title="See Details" />}
+          actionButton={
+            <CaretLink
+              title="See Details"
+              onClick={() => navigate(Page.RecurringBills)}
+            />
+          }
         />
         {Object.keys(billsSummary).map((billCategory: string, ix) => (
           <Card key={`overview-billsummary-${ix}`}>

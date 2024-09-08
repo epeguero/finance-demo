@@ -1,6 +1,7 @@
 import { ReactComponent as CaretRightIcon } from "../../assets/images/icon-caret-right.svg";
 import "./Utility.css";
 import { Budget } from "../../types/types";
+import React from "react";
 
 export const AmountWithLabel = ({
   label,
@@ -45,8 +46,9 @@ export const CardHeader = ({
 export const CaretLink = ({
   title,
   className,
+  onClick,
 }: { title: string } & React.HTMLAttributes<HTMLDivElement>) => (
-  <div className={`caret-link ${className ?? ""}`}>
+  <div className={`caret-link ${className ?? ""}`} onClick={onClick}>
     <span>{title}</span>
     <CaretRightIcon />
   </div>

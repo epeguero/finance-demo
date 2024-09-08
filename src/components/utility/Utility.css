@@ -26,9 +26,22 @@
   align-items: center;
   font-size: 0.7rem;
   color: grey;
+  transition: color 0.2s ease;
   > svg {
     width: 8px;
     height: 8px;
+    path {
+      transition: fill 0.2s ease;
+    }
+  }
+}
+
+.caret-link:hover {
+  color: black;
+  svg {
+    path {
+      fill: black;
+    }
   }
 }
 

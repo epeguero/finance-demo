@@ -85,9 +85,10 @@ const SpendingSummaryCard = ({ budgets }: { budgets: Budget[] }) => (
   <Card className="budgets-summary-card">
     <PieChart budgets={budgets} />
     <span>Spending Summary</span>
-    {budgets
-      .map((b) => (
+    <Intersperse Separator={Divider}>
+      {budgets.map((b, ix) => (
         <div
+          key={`budgets-summary-card-indicator-${ix}`}
           style={{
             display: "flex",
             alignItems: "center",
@@ -130,8 +131,7 @@ const SpendingSummaryCard = ({ budgets }: { budgets: Budget[] }) => (
             </span>
           </span>
         </div>
-      ))
-      .flatMap((t) => [<Divider />, t])
-      .slice(1)}
+      ))}
+    </Intersperse>
   </Card>
 );
