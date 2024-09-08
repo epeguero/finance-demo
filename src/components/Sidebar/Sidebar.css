@@ -1,5 +1,5 @@
 .sidebar {
-  --slide-duration: 400ms;
+  --slide-duration: 800ms;
 
   display: grid;
   grid-auto-rows: minmax(50px, max-content);
@@ -8,10 +8,11 @@
   background-color: rgb(32, 31, 36);
   border-top-right-radius: 1rem;
   border-bottom-right-radius: 1rem;
-  padding: 10px 10px 10px 0;
+  padding: 30px 10px 10px 0;
 
   transition: grid-template-columns var(--slide-duration)
-    cubic-bezier(0.74, 1.12, 0.54, 1.06);
+    cubic-bezier(0.13, 0.87, 0.17, 1.12);
+  /* cubic-bezier(0.74, 1.12, 0.54, 1.06); */
 
   > * {
     display: flex;
@@ -34,9 +35,6 @@
     svg {
       width: 20px;
       height: 20px;
-      path {
-        transition: fill 300ms ease-in;
-      }
     }
 
     span {
@@ -50,14 +48,8 @@
     }
   }
 
+  :has(.small-logo),
   :has(.large-logo) {
-    max-width: 0;
-    grid-row-start: 1;
-    grid-column-start: 1;
-    transition: max-width var(--slide-duration) ease-in-out;
-  }
-
-  :has(.small-logo) {
     grid-row-start: 1;
     grid-column-start: 1;
     svg {
@@ -75,12 +67,26 @@
     box-shadow: 2px 0px 5px white;
   }
 
+  :has(.large-logo) {
+    opacity: 0;
+    /* transition: opacity var(--slide-duration) ease-in-out; */
+    transition: opacity calc(var(--slide-duration) / 2) ease-in-out;
+    svg {
+      width: 100px;
+      height: 20px;
+    }
+  }
+
+  :has(.small-logo) {
+    transition: opacity calc(var(--slide-duration / 2)) ease-in-out;
+  }
+
   > [data-selected="true"] {
     background-color: white;
-    border-left: 5px solid darkgreen;
+    border-left-color: darkgreen;
     path {
       fill: black;
-      transition: fill 200ms ease-in;
+      transition: fill 500ms ease-in;
     }
     transition:
       background-color 100ms ease-in,
@@ -123,15 +129,23 @@
 .sidebar[data-maximized="true"] {
   grid-template-columns: 300px;
 
+  :has(.small-logo) {
+    opacity: 0;
+  }
+
   .maximize-button {
     svg {
       transform: rotate(0);
     }
   }
-  .large-logo {
-    transition: max-width 350ms ease-in-out;
-    max-width: 130px;
+  :has(.large-logo) {
     opacity: 1;
+    transition: opacity calc(var(--slide-duration) / 2) ease-in-out;
+  }
+
+  :has(.small-logo) {
+    opacity: 0;
+    transition: opacity calc(var(--slide-duration) / 1.5) ease-in-out;
   }
 
   > * > span {
