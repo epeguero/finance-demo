@@ -1,16 +1,21 @@
-import { Transaction } from "../../types/types";
+import React from "react";
+import { Budget, BudgetMeta, Transaction } from "../../types/types";
 
-export const intersperse = <T>(list: T[], elem: T) =>
-  list.flatMap((e) => [elem, e]).slice(1);
+export function createBudget(b: BudgetMeta, remaining: number): Budget {
+  return {
+    ...b,
+    remaining,
+  };
+}
 
 type CategorizedTransactions = { [key: string]: Transaction[] };
 export const transactionsByCategory = (
-  transactions: Transaction[],
+  transactions: Transaction[]
 ): CategorizedTransactions =>
   transactions.reduce<CategorizedTransactions>(
     (acc, t) => ({
       ...acc,
       [t.category]: [...(acc[t.category] ?? []), t],
     }),
-    {},
+    {}
   );

@@ -69,6 +69,33 @@ export const ColorBar = ({ color }: { color: string }) => (
 
 export const Divider = () => <div className="divider" />;
 
+// safer "Static variable" emulation with closure
+const ix = (() => {
+  let curr = -1;
+  return () => {
+    curr = curr + 1;
+    return curr;
+  };
+})();
+
+export const Intersperse = ({
+  children,
+  Separator,
+}: {
+  children?: React.ReactNode[];
+  Separator: React.ComponentType;
+}): JSX.Element => {
+  return (
+    <>
+      {(children?.length ?? 0) <= 1
+        ? children
+        : children
+            ?.flatMap((child) => [<Separator key={`sep-${ix()}`} />, child])
+            .slice(1)}
+    </>
+  );
+};
+
 export const PieChart = ({ budgets }: { budgets: Budget[] }) => {
   const budgetAllocated = budgets.reduce((acc, b) => acc + b.max, 0);
   const budgetRemaining = budgets.reduce((acc, b) => acc + b.remaining, 0);
@@ -81,7 +108,7 @@ export const PieChart = ({ budgets }: { budgets: Budget[] }) => {
         `${budgets[ix].color} ${acc.accumSegments}deg ${acc.accumSegments + b}deg`,
       ],
     }),
-    { accumSegments: 0, conicSegments: [] as string[] },
+    { accumSegments: 0, conicSegments: [] as string[] }
   ).conicSegments;
 
   // e.g.:

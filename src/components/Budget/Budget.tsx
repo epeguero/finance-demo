@@ -7,12 +7,13 @@ import {
   ColorBar,
   Divider,
   formatCurrency,
+  Intersperse,
   PieChart,
 } from "../utility/Utility";
 import "./Budget.css";
 import { useFinancials } from "../../hooks/useFinancials";
 import { TransactionEntry } from "../Transactions/TransactionEntry";
-import { intersperse, transactionsByCategory } from "../utility/utility";
+import { transactionsByCategory } from "../utility/utility";
 
 export const Budgets = (): JSX.Element => {
   const { budgets, transactions } = useFinancials();
@@ -73,14 +74,13 @@ const BudgetCard = ({
       </div>
       <Card className="latest-spending">
         <span>Latest Spending</span>
-        {intersperse(
-          transactions.slice(0, 3).map((t, ix) => (
+        <Intersperse Separator={Divider}>
+          {transactions.slice(0, 3).map((t, ix) => (
             <div key={`${t.category}-${t.party}-${ix}`}>
               <TransactionEntry transaction={t} />
             </div>
-          )),
-          <Divider />
-        )}
+          ))}
+        </Intersperse>
       </Card>
     </Card>
   );

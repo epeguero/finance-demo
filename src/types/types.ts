@@ -20,10 +20,12 @@ export type Transaction = {
 
 export type Budget = {
   category: string;
-  remaining: number;
   max: number;
+  remaining: number;
   color: string;
 };
+
+export type BudgetMeta = Omit<Budget, "remaining">;
 
 export type BillsSummary = {
   Paid: number;

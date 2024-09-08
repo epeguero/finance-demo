@@ -4,6 +4,7 @@ import {
   CardHeader,
   CaretLink,
   Divider,
+  Intersperse,
   PieChart,
   formatCurrency,
 } from "../utility/Utility";
@@ -13,7 +14,6 @@ import { BillsSummary } from "../../types/types";
 import "./Overview.css";
 import { useFinancials } from "../../hooks/useFinancials";
 import { TransactionEntry } from "../Transactions/TransactionEntry";
-import { intersperse } from "../utility/utility";
 
 export const Overview = (): JSX.Element => {
   const { pots, budgets, transactions, billsSummary } = useFinancials();
@@ -54,10 +54,11 @@ export const Overview = (): JSX.Element => {
           title="Transactions"
           actionButton={<CaretLink title="View All" />}
         />
-        {intersperse(
-          transactions.map((t) => <TransactionEntry transaction={t} />),
-          <Divider />,
-        )}
+        <Intersperse Separator={Divider}>
+          {transactions.map((t, ix) => (
+            <TransactionEntry key={`overview-tx-${ix}`} transaction={t} />
+          ))}
+        </Intersperse>
       </Card>
       <Card className="budgets">
         <CardHeader
@@ -86,7 +87,7 @@ export const Overview = (): JSX.Element => {
             <span>
               {formatCurrency(
                 billsSummary[billCategory as keyof BillsSummary],
-                true,
+                true
               )}
             </span>
           </Card>

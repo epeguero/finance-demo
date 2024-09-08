@@ -1,4 +1,14 @@
-import { Pot, Budget, Transaction, BillsSummary } from "../types/types";
+import {
+  createBudget,
+  transactionsByCategory,
+} from "../components/utility/utility";
+import {
+  Pot,
+  Budget,
+  Transaction,
+  BillsSummary,
+  BudgetMeta,
+} from "../types/types";
 
 const pots: Pot[] = [
   { name: "Savings", color: "darkgreen", size: 159 },
@@ -7,11 +17,11 @@ const pots: Pot[] = [
   { name: "New Laptop", color: "moccasin", size: 10 },
 ];
 
-const budgets: Budget[] = [
-  { category: "Entertainment", remaining: 15, max: 50, color: "darkgreen" },
-  { category: "Bills", remaining: 150, max: 750, color: "paleturquoise" },
-  { category: "Dining Out", remaining: 133, max: 75, color: "moccasin" },
-  { category: "Personal Care", remaining: 40, max: 100, color: "dimgrey" },
+const budgetMetas: BudgetMeta[] = [
+  { category: "Entertainment", max: 50, color: "darkgreen" },
+  { category: "Bills", max: 750, color: "paleturquoise" },
+  { category: "Dining Out", max: 75, color: "moccasin" },
+  { category: "Personal Care", max: 100, color: "dimgrey" },
 ];
 
 const transactions: Transaction[] = [
@@ -118,9 +128,33 @@ export const useFinancials: () => {
   budgets: Budget[];
   transactions: Transaction[];
   billsSummary: BillsSummary;
-} = () => ({
-  pots,
-  budgets,
-  transactions,
-  billsSummary,
-});
+} = () => {
+  const categorizedTransactions = transactionsByCategory(transactions);
+  const budgetMaxes = budgetMetas.reduce<Record<string, number>>(
+    (acc, b) => ({ ...acc, [b.category]: b.max }),
+    {}
+  );
+  const remainingBudgets = budgetMetas.reduce<Record<string, number>>(
+    (acc, b) => ({
+      ...acc,
+      [b.category]:
+        acc[b.category] ??
+        0 +
+          categorizedTransactions[b.category].reduce<number>(
+            (acc, t) => acc + t.amount,
+            0
+          ),
+    }),
+    budgetMaxes
+  );
+  const budgets = budgetMetas.map((b) =>
+    createBudget(b, remainingBudgets[b.category])
+  );
+  console.log(budgets);
+  return {
+    pots,
+    budgets,
+    transactions,
+    billsSummary,
+  };
+};
