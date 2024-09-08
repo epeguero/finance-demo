@@ -5,20 +5,20 @@ import "./App.css";
 import { Page } from "../../types/types";
 import { Budgets } from "../Budget/Budget";
 
+const pages: Record<Page, () => JSX.Element> = {
+  overview: () => <Overview />,
+  pots: () => <div>Unimplemented</div>,
+  budgets: () => <Budgets />,
+  transactions: () => <div>Unimplemented</div>,
+  "recurring-bills": () => <div>Unimplemented</div>,
+};
+
 function App() {
   const [page, setPage] = useState<Page>("overview");
   return (
     <div className="App">
       <Sidebar currentPage={page} onPageSelect={setPage} />
-      {(
-        {
-          overview: () => <Overview />,
-          pots: () => <div>Unimplemented</div>,
-          budgets: () => <Budgets />,
-          transactions: () => <div>Unimplemented</div>,
-          "recurring-bills": () => <div>Unimplemented</div>,
-        } satisfies Record<Page, () => JSX.Element>
-      )[page]()}
+      {pages[page]()}
     </div>
   );
 }

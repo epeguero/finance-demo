@@ -23,10 +23,13 @@ export const Sidebar = ({
   const [isMaximized, setIsMaximized] = useState(false);
   return (
     <div className="sidebar" data-maximized={isMaximized}>
-      <LogoSmallIcon className="small-logo" />
-      <LogoLargeIcon className="large-logo" />
+      <div>
+        <LogoSmallIcon className="small-logo" />
+      </div>
+      <div>
+        <LogoLargeIcon className="large-logo" />
+      </div>
       <div
-        className="sidebar-item"
         data-selected={currentPage === "overview"}
         onClick={() => onPageSelect("overview")}
       >
@@ -34,7 +37,6 @@ export const Sidebar = ({
         <span>Overview</span>
       </div>
       <div
-        className="sidebar-item"
         data-selected={currentPage === "transactions"}
         onClick={() => onPageSelect("transactions")}
       >
@@ -42,7 +44,6 @@ export const Sidebar = ({
         <span>Transactions</span>
       </div>
       <div
-        className="sidebar-item"
         data-selected={currentPage === "budgets"}
         onClick={() => onPageSelect("budgets")}
       >
@@ -50,7 +51,6 @@ export const Sidebar = ({
         <span>Budgets</span>
       </div>
       <div
-        className="sidebar-item"
         data-selected={currentPage === "pots"}
         onClick={() => onPageSelect("pots")}
       >
@@ -58,7 +58,6 @@ export const Sidebar = ({
         <span>Pots</span>
       </div>
       <div
-        className="sidebar-item"
         data-selected={currentPage === "recurring-bills"}
         onClick={() => onPageSelect("recurring-bills")}
       >
