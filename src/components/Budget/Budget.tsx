@@ -49,8 +49,6 @@ const BudgetCard = ({
     <div className={"percentage-bar"}>
       <div
         style={{
-          position: "relative",
-          height: "100%",
           width: `${Math.min((budget.remaining / budget.maximum) * 100, 100)}%`,
           backgroundColor: budget.theme,
         }}

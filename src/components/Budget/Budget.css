@@ -18,8 +18,27 @@
     display: grid;
   }
 
+  > .card.budgets-summary-card {
+    display: grid;
+    grid-auto-rows: min-content;
+    grid-column: 1 / span 1;
+    grid-row: 2 / span 2;
+    height: 52%;
+
+    .pie-chart {
+      justify-self: center;
+    }
+    > span:nth-of-type(1) {
+      margin: 40px 0 20px 0;
+    }
+
+    .colorbar {
+      height: 1.2rem;
+    }
+  }
+
   > .card.budget-card {
-    row-gap: 20px;
+    row-gap: 15px;
     grid-column: 2 / span 1;
 
     > span {
@@ -40,6 +59,29 @@
       grid-column: 1 / span 2;
     }
     .latest-spending {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      row-gap: 13px;
+      > :nth-child(1) {
+        margin-bottom: 5px;
+      }
+
+      > * {
+        grid-column: span 2;
+      }
+
+      .transaction-list {
+        display: flex;
+        flex-direction: column;
+        gap: 13px;
+        max-height: 150px;
+        overflow-y: scroll;
+      }
+
+      .divider {
+        border-top-color: rgb(227, 224, 220);
+        margin: 0;
+      }
       > span:first-of-type {
         font-size: 0.85rem;
       }
@@ -48,55 +90,16 @@
       padding: 1rem;
     }
   }
-
-  .card.budgets-summary-card {
-    display: grid;
-    grid-auto-rows: min-content;
-    grid-column: 1 / span 1;
-    grid-row: 2 / span 2;
-    height: 50%;
-
-    .pie-chart {
-      justify-self: center;
-    }
-    > span:nth-of-type(1) {
-      margin: 40px 0 20px 0;
-    }
-
-    .colorbar {
-      height: 1.2rem;
-    }
-  }
-
-  .card.latest-spending {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    row-gap: 13px;
-    max-height: 12%;
-    > :nth-child(1) {
-      margin-bottom: 5px;
-    }
-
-    > * {
-      grid-column: span 2;
-    }
-
-    .transaction-list {
-      display: flex;
-      flex-direction: column;
-      gap: 13px;
-      overflow-y: scroll;
-    }
-
-    .divider {
-      border-top-color: rgb(227, 224, 220);
-      margin: 0;
-    }
-  }
 }
 
 .percentage-bar {
-  height: 30px;
+  height: 20px;
   width: 100%;
-  padding: 2px;
+  padding: 3px;
+  border-radius: 0.25rem;
+  > :nth-child(1) {
+    position: "relative";
+    height: 100%;
+    border-radius: 0.25rem;
+  }
 }
