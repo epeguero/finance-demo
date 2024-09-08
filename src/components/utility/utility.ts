@@ -1,5 +1,10 @@
 import React from "react";
-import { Budget, BudgetMeta, Transaction } from "../../types/types";
+import {
+  Budget,
+  BudgetMeta,
+  CategorizedTransactions,
+  Transaction,
+} from "../../types/types";
 
 export function createBudget(b: BudgetMeta, remaining: number): Budget {
   return {
@@ -8,7 +13,6 @@ export function createBudget(b: BudgetMeta, remaining: number): Budget {
   };
 }
 
-type CategorizedTransactions = { [key: string]: Transaction[] };
 export const transactionsByCategory = (
   transactions: Transaction[]
 ): CategorizedTransactions =>

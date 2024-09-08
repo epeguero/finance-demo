@@ -13,12 +13,9 @@ import {
 import "./Budget.css";
 import { useFinancials } from "../../hooks/useFinancials";
 import { TransactionEntry } from "../Transactions/TransactionEntry";
-import { transactionsByCategory } from "../utility/utility";
 
 export const Budgets = (): JSX.Element => {
-  const { budgets, transactions } = useFinancials();
-  const categorizedTransactions = transactionsByCategory(transactions);
-  console.log(categorizedTransactions);
+  const { budgets, categorizedTransactions } = useFinancials();
   return (
     <div className="budgets-page">
       <span>Budgets</span>
@@ -40,50 +37,49 @@ const BudgetCard = ({
 }: {
   budget: Budget;
   transactions: Transaction[];
-}) =>
-  transactions && (
-    <Card className="budget-card">
-      <span style={{ display: "flex", gap: "15px", alignItems: "center" }}>
-        <Circle color={budget.color} />
-        {budget.category}
-      </span>
-      <span style={{ color: "grey", fontSize: "0.7rem" }}>
-        {`Maximum of ${formatCurrency(budget.max, true)}`}
-      </span>
-      <div className={"percentage-bar"}>
-        <div
-          style={{
-            position: "relative",
-            height: "100%",
-            width: `${Math.min((budget.remaining / budget.max) * 100, 100)}%`,
-            backgroundColor: budget.color,
-          }}
-        />
-      </div>
-      <div className={"amount-indicators"}>
-        <AmountWithLabel
-          label={"Spent"}
-          amount={budget.max - budget.remaining}
-          color={budget.color}
-        />
-        <AmountWithLabel
-          label={"Remaining"}
-          amount={budget.remaining}
-          color={"rgb(248, 244, 240)"}
-        />
-      </div>
-      <Card className="latest-spending">
-        <span>Latest Spending</span>
-        <Intersperse Separator={Divider}>
-          {transactions.slice(0, 3).map((t, ix) => (
-            <div key={`${t.category}-${t.party}-${ix}`}>
-              <TransactionEntry transaction={t} />
-            </div>
-          ))}
-        </Intersperse>
-      </Card>
+}) => (
+  <Card className="budget-card">
+    <span style={{ display: "flex", gap: "15px", alignItems: "center" }}>
+      <Circle color={budget.theme} />
+      {budget.category}
+    </span>
+    <span style={{ color: "grey", fontSize: "0.7rem" }}>
+      {`Maximum of ${formatCurrency(budget.maximum, true)}`}
+    </span>
+    <div className={"percentage-bar"}>
+      <div
+        style={{
+          position: "relative",
+          height: "100%",
+          width: `${Math.min((budget.remaining / budget.maximum) * 100, 100)}%`,
+          backgroundColor: budget.theme,
+        }}
+      />
+    </div>
+    <div className={"amount-indicators"}>
+      <AmountWithLabel
+        label={"Spent"}
+        amount={budget.maximum - budget.remaining}
+        color={budget.theme}
+      />
+      <AmountWithLabel
+        label={"Remaining"}
+        amount={budget.remaining}
+        color={"rgb(248, 244, 240)"}
+      />
+    </div>
+    <Card className="latest-spending">
+      <span>Latest Spending</span>
+      <Intersperse Separator={Divider}>
+        {transactions.map((t, ix) => (
+          <div key={`${t.category}-${t.name}-${ix}`}>
+            <TransactionEntry transaction={t} />
+          </div>
+        ))}
+      </Intersperse>
     </Card>
-  );
+  </Card>
+);
 
 const SpendingSummaryCard = ({ budgets }: { budgets: Budget[] }) => (
   <Card className="budgets-summary-card">
@@ -109,7 +105,7 @@ const SpendingSummaryCard = ({ budgets }: { budgets: Budget[] }) => (
               color: "grey",
             }}
           >
-            <ColorBar color={b.color} />
+            <ColorBar color={b.theme} />
             {b.category}
           </span>
           <span
@@ -130,7 +126,7 @@ const SpendingSummaryCard = ({ budgets }: { budgets: Budget[] }) => (
                 color: "grey",
               }}
             >
-              of {formatCurrency(b.max)}
+              of {formatCurrency(b.maximum)}
             </span>
           </span>
         </div>

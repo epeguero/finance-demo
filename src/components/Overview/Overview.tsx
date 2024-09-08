@@ -45,7 +45,7 @@ export const Overview = (): JSX.Element => {
             className={`pot${ix + 1}`}
             label={pot.name}
             amount={pot.size}
-            color={pot.color}
+            color={pot.theme}
           />
         ))}
       </Card>
@@ -54,11 +54,13 @@ export const Overview = (): JSX.Element => {
           title="Transactions"
           actionButton={<CaretLink title="View All" />}
         />
-        <Intersperse Separator={Divider}>
-          {transactions.map((t, ix) => (
-            <TransactionEntry key={`overview-tx-${ix}`} transaction={t} />
-          ))}
-        </Intersperse>
+        <div className="transactions-list">
+          <Intersperse Separator={Divider}>
+            {transactions.map((t, ix) => (
+              <TransactionEntry key={`overview-tx-${ix}`} transaction={t} />
+            ))}
+          </Intersperse>
+        </div>
       </Card>
       <Card className="budgets">
         <CardHeader
@@ -68,10 +70,10 @@ export const Overview = (): JSX.Element => {
         <PieChart budgets={budgets} />
         {budgets.map((b, ix) => (
           <AmountWithLabel
-            key={`budgets-budget-${ix}`}
+            key={`overview-budget-${ix}`}
             label={b.category}
-            amount={b.max}
-            color={b.color}
+            amount={b.maximum}
+            color={b.theme}
             cents
           />
         ))}
@@ -81,8 +83,8 @@ export const Overview = (): JSX.Element => {
           title="Recurring Bills"
           actionButton={<CaretLink title="See Details" />}
         />
-        {Object.keys(billsSummary).map((billCategory: string) => (
-          <Card>
+        {Object.keys(billsSummary).map((billCategory: string, ix) => (
+          <Card key={`overview-billsummary-${ix}`}>
             <span>{billCategory}</span>
             <span>
               {formatCurrency(

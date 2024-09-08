@@ -8,21 +8,24 @@ export type Page =
 export type Pot = {
   name: string;
   size: number;
-  color: string;
+  theme: string;
 };
 
 export type Transaction = {
-  party: string;
+  avatar: string;
+  name: string;
   category: string;
-  transactionDate: Date;
+  date: Date;
   amount: number;
 };
 
+export type CategorizedTransactions = { [key: string]: Transaction[] };
+
 export type Budget = {
   category: string;
-  max: number;
+  maximum: number;
   remaining: number;
-  color: string;
+  theme: string;
 };
 
 export type BudgetMeta = Omit<Budget, "remaining">;

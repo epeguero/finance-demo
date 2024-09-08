@@ -12,20 +12,14 @@ export const TransactionEntry = ({
   <div className="transaction">
     <img
       className="avatar"
-      src={require(
-        `../../assets/images/avatars/${transaction.party
-          .toLowerCase()
-          .split(" ")
-          .join("-")
-          .replace("&", "and")}.jpg`,
-      )}
-      alt={transaction.party}
+      src={require(`../../assets/images/avatars/${transaction.avatar}`)}
+      alt={transaction.name}
     />
-    <span>{transaction.party}</span>
-    <span className={transaction.amount > 0 ? "positive-amount" : ""}>
-      {transaction.amount > 0 ? "+" : ""}
+    <span>{transaction.name}</span>
+    <span className={transaction.amount < 0 ? "positive-amount" : ""}>
+      {transaction.amount < 0 ? "+" : "-"}
       {formatCurrency(transaction.amount, true)}
     </span>
-    <span>{format(transaction.transactionDate, "d MMM y")}</span>
+    <span>{format(transaction.date, "d MMM y")}</span>
   </div>
 );

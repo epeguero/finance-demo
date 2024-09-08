@@ -97,15 +97,17 @@ export const Intersperse = ({
 };
 
 export const PieChart = ({ budgets }: { budgets: Budget[] }) => {
-  const budgetAllocated = budgets.reduce((acc, b) => acc + b.max, 0);
+  const budgetAllocated = budgets.reduce((acc, b) => acc + b.maximum, 0);
   const budgetRemaining = budgets.reduce((acc, b) => acc + b.remaining, 0);
-  const budgetSegments = budgets.map((b) => (b.max / budgetAllocated) * 360);
+  const budgetSegments = budgets.map(
+    (b) => (b.maximum / budgetAllocated) * 360
+  );
   const conicSegments = budgetSegments.reduce(
     (acc, b, ix) => ({
       accumSegments: acc.accumSegments + b,
       conicSegments: [
         ...acc.conicSegments,
-        `${budgets[ix].color} ${acc.accumSegments}deg ${acc.accumSegments + b}deg`,
+        `${budgets[ix].theme} ${acc.accumSegments}deg ${acc.accumSegments + b}deg`,
       ],
     }),
     { accumSegments: 0, conicSegments: [] as string[] }
