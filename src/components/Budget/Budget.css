@@ -8,27 +8,58 @@
   padding: 2rem;
   overflow-y: scroll;
 
-  >span:nth-of-type(1) {
-    grid-column: 1/ span 2;
+  > span:nth-of-type(1) {
+    grid-column: 1 / span 2;
     font-weight: bold;
     font-size: 1.5rem;
   }
 
-  >.card {
+  > .card {
     display: grid;
-    grid-row-start: 2;
+  }
 
+  > .card.budget-card {
+    row-gap: 20px;
+    grid-column: 2 / span 1;
+
+    > span {
+      grid-column: 1 / span 2;
+    }
     .divider {
-      margin: 10px 0 10px 0;
+      grid-column: 1 / span 2;
+    }
+    .percentage-bar {
+      grid-column: 1 / span 2;
+      background-color: rgb(248, 244, 240);
+    }
+    .amount-with-label {
+      flex: 1;
+    }
+    .amount-indicators {
+      display: flex;
+      grid-column: 1 / span 2;
+    }
+    .latest-spending {
+      > span:first-of-type {
+        font-size: 0.85rem;
+      }
+      grid-column: 1 / span 2;
+      background-color: rgb(248, 244, 240);
+      padding: 1rem;
     }
   }
 
-  >.card.budgets-summary-card {
+  .card.budgets-summary-card {
+    display: grid;
+    grid-auto-rows: min-content;
     grid-column: 1 / span 1;
     grid-row: 2 / span 2;
-    height: 52%;
+    height: 50%;
 
-    >span:nth-of-type(1) {
+    .pie-chart {
+      justify-self: center;
+    }
+    > span:nth-of-type(1) {
       margin: 40px 0 20px 0;
     }
 
@@ -37,41 +68,23 @@
     }
   }
 
-  >.card.budget-card {
-    row-gap: 20px;
-    grid-column: 2/ span 1;
-
-    >span {
-      grid-column: 1/ span 2;
+  .card.latest-spending {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    row-gap: 13px;
+    > :nth-child(1) {
+      margin-bottom: 5px;
     }
+
+    > * {
+      grid-column: span 2;
+    }
+
     .divider {
-      grid-column: 1 / span 2;
-    }
-    .percentage-bar {
-      grid-column: 1/ span 2;
-      background-color: rgb(248, 244, 240);
-    }
-    .amount-indicators {
-      display: flex;
-      grid-column: 1/ span 2;
-    }
-    .latest-spending {
-      >span:first-of-type {
-        font-size: 0.85rem;
-      }
-      grid-column: 1/ span 2;
-      background-color: rgb(248, 244, 240);
-      padding: 1rem;
+      border-top-color: rgb(227, 224, 220);
+      margin: 0;
     }
   }
-
-  >.card:not(.card:first-of-type) {
-    grid-row-start: unset;
-    .amount-with-label {
-      flex: 1;
-    }
-  }
-
 }
 
 .percentage-bar {
@@ -79,4 +92,3 @@
   width: 100%;
   padding: 2px;
 }
-

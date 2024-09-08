@@ -1,27 +1,32 @@
-export type Page = 'overview' | 'transactions' | 'budgets' | 'pots' | 'recurring-bills';
+export type Page =
+  | "overview"
+  | "transactions"
+  | "budgets"
+  | "pots"
+  | "recurring-bills";
 
 export type Pot = {
-  name: string,
-  size: number,
-  color: string
-}
+  name: string;
+  size: number;
+  color: string;
+};
 
 export type Transaction = {
-  party: string,
-  category: string,
-  transactionDate: Date,
+  party: string;
+  category: string;
+  transactionDate: Date;
   amount: number;
-}
+};
 
 export type Budget = {
-  category: string,
-  remaining: number,
-  max: number,
-  color: string
-}
+  category: string;
+  remaining: number;
+  max: number;
+  color: string;
+};
 
 export type BillsSummary = {
-  "Paid": number;
+  Paid: number;
   "Total Upcoming": number;
   "Due Soon": number;
-}
+};
