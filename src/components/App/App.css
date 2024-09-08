@@ -31,7 +31,7 @@ body,
 
 /* Webkit browsers (Chrome, Safari, newer versions of Edge) */
 ::-webkit-scrollbar {
-  width: 0px; /* width of the entire scrollbar */
+  width: 8px; /* width of the entire scrollbar */
 }
 
 ::-webkit-scrollbar-track {

@@ -1,14 +1,14 @@
 .budgets-page {
   display: grid;
-  grid-template-columns: 0.33fr 0.66fr;
-  grid-auto-rows: 1fr;
+  grid-template-columns: 1fr 2fr;
+  grid-auto-rows: min-content;
   grid-auto-flow: column;
   row-gap: var(--row-gap);
   column-gap: var(--column-gap);
   padding: 2rem;
   overflow-y: scroll;
 
-  > span:nth-of-type(1) {
+  > :nth-child(1) {
     grid-column: 1 / span 2;
     font-weight: bold;
     font-size: 1.5rem;
@@ -72,12 +72,20 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     row-gap: 13px;
+    max-height: 12%;
     > :nth-child(1) {
       margin-bottom: 5px;
     }
 
     > * {
       grid-column: span 2;
+    }
+
+    .transaction-list {
+      display: flex;
+      flex-direction: column;
+      gap: 13px;
+      overflow-y: scroll;
     }
 
     .divider {

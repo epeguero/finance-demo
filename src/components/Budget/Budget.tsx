@@ -70,13 +70,15 @@ const BudgetCard = ({
     </div>
     <Card className="latest-spending">
       <span>Latest Spending</span>
-      <Intersperse Separator={Divider}>
-        {transactions.map((t, ix) => (
-          <div key={`${t.category}-${t.name}-${ix}`}>
-            <TransactionEntry transaction={t} />
-          </div>
-        ))}
-      </Intersperse>
+      <div className="transaction-list">
+        <Intersperse Separator={Divider}>
+          {transactions.map((t, ix) => (
+            <div key={`${t.category}-${t.name}-${ix}`}>
+              <TransactionEntry transaction={t} />
+            </div>
+          ))}
+        </Intersperse>
+      </div>
     </Card>
   </Card>
 );
