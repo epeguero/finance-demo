@@ -1,4 +1,3 @@
-import { useRef } from 'react';
 import { ReactComponent as CaretRightIcon } from '../../assets/images/icon-caret-right.svg';
 import './Utility.css';
 import { Budget } from '../../types/types';
@@ -24,6 +23,12 @@ export const CaretLink = ({title, className}: {title: string} & React.HTMLAttrib
     <span>{title}</span>
     <CaretRightIcon/>
   </div>
+
+export const Circle = ({color}: {color: string}) =>
+  <div style={{backgroundColor: color, borderRadius: '100%', height: '0.85rem', width: '0.85rem'}}></div>
+
+export const ColorBar = ({color}: {color: string}) => 
+  <div style={{backgroundColor: color}} className='colorbar'></div>
 
 export const Divider = () => <div className='divider'/>
 

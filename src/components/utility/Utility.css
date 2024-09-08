@@ -1,9 +1,11 @@
 .card {
-  display: flex;
-  flex-direction: column;
+  display: grid;
   background-color: white;
   border-radius: .75rem;
   padding: 1.5rem 1.5rem 1.5rem 1.5rem;
+  >span:nth-of-type(1) {
+    font-weight: bold;
+  }
 }
 
 .card-header {
@@ -36,14 +38,6 @@
   column-gap: 15px;
   white-space: nowrap;
 
-  .colorbar {
-    grid-column: 1 / span 1;
-    grid-row: 1 / span 2;
-    width: 4px;
-    height: 100%;
-    border-radius: 1rem;
-  }
-
   >span:nth-of-type(1) {
     grid-column: 2 / span 1;
     grid-row: 1 / span 1;
@@ -60,6 +54,16 @@
     font-weight: bold;
     padding-bottom: 2px;
   }
+  .colorbar {
+    grid-column: 1 / span 1;
+    grid-row: 1 / span 2;
+    height: 100%;
+  }
+}
+
+.colorbar {
+  width: 4px;
+  border-radius: 1rem;
 }
 
 .divider {

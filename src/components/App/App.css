@@ -26,3 +26,19 @@ body {
   font-family: "Public Sans";
   background-color: rgb(248, 244, 240);
 }
+
+/* Webkit browsers (Chrome, Safari, newer versions of Edge) */
+::-webkit-scrollbar {
+  width: 10px;  /* width of the entire scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;  /* color of the tracking area */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #D3D3D3;  /* light gray color */
+  border-radius: 20px;  /* roundness of the scroll thumb */
+  border: 3px solid transparent;  /* creates padding around scroll thumb */
+  background-clip: content-box;
+}

@@ -12,28 +12,29 @@ import { ReactComponent as LeftArrowIcon } from '../../assets/images/icon-minimi
 
 import './Sidebar.css';
 
-export const Sidebar = ({currentPage}: {currentPage: Page}) => {
+export const Sidebar = ({currentPage, onPageSelect}: {currentPage: Page, onPageSelect: (_: Page) => void}) => {
+  console.log(currentPage);
   const [isMaximized, setIsMaximized] = useState(false);
   return <div className='sidebar' data-maximized={isMaximized}>
     <LogoSmallIcon className='small-logo'/>
     <LogoLargeIcon className='large-logo'/>
-    <div className='sidebar-item' data-selected={currentPage === 'overview'}>
+    <div className='sidebar-item' data-selected={currentPage === 'overview'} onClick={() => onPageSelect('overview')}>
       <OverviewIcon className='overview-icon' />
       <span>Overview</span>
     </div>
-    <div className='sidebar-item' data-selected={currentPage === 'transactions'}>
+    <div className='sidebar-item' data-selected={currentPage === 'transactions'} onClick={() => onPageSelect('transactions')}>
       <TransactionsIcon className='transactions-icon' />
       <span>Transactions</span>
     </div>
-    <div className='sidebar-item' data-selected={currentPage === 'budgets'}>
+    <div className='sidebar-item' data-selected={currentPage === 'budgets'} onClick={() => onPageSelect('budgets')}>
       <BudgetsIcon className='budgets-icon' />
       <span>Budgets</span>
     </div>
-    <div className='sidebar-item' data-selected={currentPage === 'pots'}>
+    <div className='sidebar-item' data-selected={currentPage === 'pots'} onClick={() => onPageSelect('pots')}>
       <PotsIcon className='pots-icon' />
       <span>Pots</span>
     </div>
-    <div className='sidebar-item' data-selected={currentPage === 'recurring-bills'}>
+    <div className='sidebar-item' data-selected={currentPage === 'recurring-bills'} onClick={() => onPageSelect('recurring-bills')}>
       <RecurringBillsIcon className='recurring-bills-icon' />
       <span>Recurring Bills</span>
     </div>

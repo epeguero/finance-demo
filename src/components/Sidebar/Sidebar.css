@@ -12,14 +12,18 @@
   transition: grid-template-columns var(--slide-duration) cubic-bezier(.74,1.12,.54,1.06);
 
   .sidebar-item {
+    font-weight: lighter;
     position: relative;
     display: flex;
+    align-items: center;
     gap: 15px;
     padding: 17px 0px 17px 40px;
     margin-right: 10px;
     border-left: 5px solid transparent;
     svg { flex: 0 0 1; min-width: 20px;  height: 20px;}
-    span { font-weight: bold; white-space: nowrap;}
+    span { white-space: nowrap;}
+
+    transition: box-shadow 100ms ease-in-out
   }
 
   .sidebar-item[data-selected="true"] {
@@ -27,7 +31,12 @@
     border-top-right-radius: 0.8rem;
     border-bottom-right-radius: 0.8rem;
     border-left: 5px solid darkgreen;
-    path {fill: black;}
+    path {fill: black; transition: fill 200ms ease-in;}
+    transition: background-color 100ms ease-in, color 100ms ease-in;
+  }
+
+  .sidebar-item[data-selected="false"]:hover {
+    box-shadow: 2px 0px 5px white;
   }
 
   .small-logo, .large-logo {
@@ -48,8 +57,8 @@
 
   .sidebar-item > span {
     max-width: 0;
-    opacity: 0;
     transition: max-width 200ms ease-in-out, opacity 200ms ease 100ms;
+    box-shadow: 0 0 0 transparent;
   }
 
   .maximize-button{
@@ -66,12 +75,18 @@
   .maximize-button:hover {
     path {fill: white;}
   }
+
 }
 
 .sidebar[data-maximized="false"] {
   .maximize-button {
     transform: rotate(-0.5turn) translate(300%, 300%);
   }
+
+  .sidebar-item > span {
+    opacity: 0;
+  }
+
   .sidebar-item[data-selected="true"]::before {
     content: '';
     position: absolute;
@@ -84,6 +99,7 @@
     animation: var(--slide-duration) cubic-bezier(.74,1.12,.54,1.06) driftIn;
     /* background: linear-gradient(to left, darkgreen, white); */
   }
+
 }
 
 .sidebar[data-maximized="true"] {
@@ -96,7 +112,6 @@
 
   .sidebar-item > span {
     max-width: 100%;
-    opacity: 1;
   }
 
   .sidebar-item[data-selected="true"] {
@@ -104,7 +119,7 @@
   }
 
   .sidebar-item[data-selected="false"] {
-    span {opacity: 0;}
+    color: white;
   }
 
   .sidebar-item[data-selected="true"]::before {
@@ -140,7 +155,7 @@
   }
 
   100% {
-    opacity: 0.5;
+    opacity: 0.7;
     width: 0;
   }
 }

@@ -1,0 +1,82 @@
+.budgets-page {
+  display: grid;
+  grid-template-columns: 0.33fr 0.66fr;
+  grid-auto-rows: 1fr;
+  grid-auto-flow: column;
+  row-gap: var(--row-gap);
+  column-gap: var(--column-gap);
+  padding: 2rem;
+  overflow-y: scroll;
+
+  >span:nth-of-type(1) {
+    grid-column: 1/ span 2;
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
+
+  >.card {
+    display: grid;
+    grid-row-start: 2;
+
+    .divider {
+      margin: 10px 0 10px 0;
+    }
+  }
+
+  >.card.budgets-summary-card {
+    grid-column: 1 / span 1;
+    grid-row: 2 / span 2;
+    height: 52%;
+
+    >span:nth-of-type(1) {
+      margin: 40px 0 20px 0;
+    }
+
+    .colorbar {
+      height: 1.2rem;
+    }
+  }
+
+  >.card.budget-card {
+    row-gap: 20px;
+    grid-column: 2/ span 1;
+
+    >span {
+      grid-column: 1/ span 2;
+    }
+    .divider {
+      grid-column: 1 / span 2;
+    }
+    .percentage-bar {
+      grid-column: 1/ span 2;
+      background-color: rgb(248, 244, 240);
+    }
+    .amount-indicators {
+      display: flex;
+      grid-column: 1/ span 2;
+    }
+    .latest-spending {
+      >span:first-of-type {
+        font-size: 0.85rem;
+      }
+      grid-column: 1/ span 2;
+      background-color: rgb(248, 244, 240);
+      padding: 1rem;
+    }
+  }
+
+  >.card:not(.card:first-of-type) {
+    grid-row-start: unset;
+    .amount-with-label {
+      flex: 1;
+    }
+  }
+
+}
+
+.percentage-bar {
+  height: 30px;
+  width: 100%;
+  padding: 2px;
+}
+
