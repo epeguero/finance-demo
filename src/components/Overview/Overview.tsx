@@ -39,15 +39,17 @@ export const Overview = (): JSX.Element => {
           <span>Total Saved</span>
           <span className="amount">{formatCurrency(850, false)}</span>
         </Card>
-        {pots.map((pot, ix) => (
-          <AmountWithLabel
-            key={`pots-pot${ix + 1}`}
-            className={`pot${ix + 1}`}
-            label={pot.name}
-            amount={pot.size}
-            color={pot.theme}
-          />
-        ))}
+        <div className={"pot-sizes"}>
+          {pots.map((pot, ix) => (
+            <AmountWithLabel
+              key={`pots-pot${ix + 1}`}
+              className={`pot${ix + 1}`}
+              label={pot.name}
+              amount={pot.size}
+              color={pot.theme}
+            />
+          ))}
+        </div>
       </Card>
       <Card className="transactions">
         <CardHeader

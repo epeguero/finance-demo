@@ -15,7 +15,7 @@ export const AmountWithLabel = ({
   cents?: boolean;
   color: string;
 } & React.HTMLAttributes<HTMLDivElement>) => (
-  <div className={`amount-with-label ${className}`} {...divProps}>
+  <div className={`amount-with-label ${className ?? ""}`} {...divProps}>
     <div style={{ backgroundColor: color }} className="colorbar"></div>
     <span>{label}</span>
     <span>{formatCurrency(amount, cents)}</span>
