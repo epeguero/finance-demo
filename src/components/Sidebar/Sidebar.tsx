@@ -11,15 +11,13 @@ import { ReactComponent as RecurringBillsIcon } from "../../assets/images/icon-n
 import { ReactComponent as LeftArrowIcon } from "../../assets/images/icon-minimize-menu.svg";
 
 import "./Sidebar.css";
+import { useNavigationContext } from "../../hooks/Navigation";
 
-export const Sidebar = ({
-  currentPage,
-  onPageSelect,
-}: {
-  currentPage: Page;
-  onPageSelect: (_: Page) => void;
-}) => {
-  console.log(currentPage);
+export const Sidebar = () => {
+  const {
+    navigate,
+    current: { page },
+  } = useNavigationContext();
   const [isMaximized, setIsMaximized] = useState(false);
   return (
     <div className="sidebar" data-maximized={isMaximized}>
@@ -30,36 +28,36 @@ export const Sidebar = ({
         <LogoLargeIcon className="large-logo" />
       </div>
       <div
-        data-selected={currentPage === "overview"}
-        onClick={() => onPageSelect("overview")}
+        onClick={() => navigate(Page.Overview)}
+        data-selected={page === Page.Overview}
       >
         <OverviewIcon className="overview-icon" />
         <span>Overview</span>
       </div>
       <div
-        data-selected={currentPage === "transactions"}
-        onClick={() => onPageSelect("transactions")}
+        onClick={() => navigate(Page.Transactions)}
+        data-selected={page === Page.Transactions}
       >
         <TransactionsIcon className="transactions-icon" />
         <span>Transactions</span>
       </div>
       <div
-        data-selected={currentPage === "budgets"}
-        onClick={() => onPageSelect("budgets")}
+        onClick={() => navigate(Page.Budgets)}
+        data-selected={page === Page.Budgets}
       >
         <BudgetsIcon className="budgets-icon" />
         <span>Budgets</span>
       </div>
       <div
-        data-selected={currentPage === "pots"}
-        onClick={() => onPageSelect("pots")}
+        onClick={() => navigate(Page.Pots)}
+        data-selected={page === Page.Pots}
       >
         <PotsIcon className="pots-icon" />
         <span>Pots</span>
       </div>
       <div
-        data-selected={currentPage === "recurring-bills"}
-        onClick={() => onPageSelect("recurring-bills")}
+        onClick={() => navigate(Page.RecurringBills)}
+        data-selected={page === Page.RecurringBills}
       >
         <RecurringBillsIcon className="recurring-bills-icon" />
         <span>Recurring Bills</span>

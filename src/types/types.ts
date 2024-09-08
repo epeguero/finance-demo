@@ -1,9 +1,10 @@
-export type Page =
-  | "overview"
-  | "transactions"
-  | "budgets"
-  | "pots"
-  | "recurring-bills";
+export const enum Page {
+  Overview = "Overview",
+  Transactions = "Transactions",
+  Budgets = "Budgets",
+  Pots = "Pots",
+  RecurringBills = "RecurringBills",
+}
 
 export type Pot = {
   name: string;
