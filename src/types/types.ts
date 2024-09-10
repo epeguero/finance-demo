@@ -22,8 +22,21 @@ export type Transaction = {
 
 export type CategorizedTransactions = { [key: string]: Transaction[] };
 
+export enum BudgetCategory {
+  Entertainment = "Entertainment",
+  Bills = "Bills",
+  Groceries = "Groceries",
+  DiningOut = "Dining Out",
+  Transportation = "Transportation",
+  PersonalCare = "Personal Care",
+  Education = "Education",
+  Lifestyle = "Lifestyle",
+  Shopping = "Shopping",
+  General = "General",
+}
+
 export type Budget = {
-  category: string;
+  category: BudgetCategory;
   maximum: number;
   remaining: number;
   theme: string;
@@ -36,3 +49,19 @@ export type BillsSummary = {
   "Total Upcoming": number;
   "Due Soon": number;
 };
+
+export enum Theme {
+  Green = "green",
+  Yellow = "yellow",
+  Cyan = "cyan",
+  Navy = "navy",
+  Red = "red",
+  Purple = "purple",
+  Turquoise = "turquoise",
+  Brown = "brown",
+  Magenta = "magenta",
+  Blue = "blue",
+  Pink = "pink",
+  Gold = "gold",
+  Orange = "orange",
+}

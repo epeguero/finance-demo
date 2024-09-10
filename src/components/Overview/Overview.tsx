@@ -12,12 +12,12 @@ import { ReactComponent as PotIcon } from "../../assets/images/icon-pot.svg";
 import { BillsSummary, Page } from "../../types/types";
 
 import "./Overview.css";
-import { useFinancials } from "../../hooks/useFinancials";
 import { TransactionEntry } from "../Transactions/TransactionEntry";
 import { useNavigationContext } from "../../hooks/Navigation";
+import { useFinancialsContext } from "../../hooks/Financials";
 
 export const Overview = (): JSX.Element => {
-  const { pots, budgets, transactions, billsSummary } = useFinancials();
+  const { pots, budgets, transactions, billsSummary } = useFinancialsContext();
   const { navigate } = useNavigationContext();
   return (
     <div className="overview">

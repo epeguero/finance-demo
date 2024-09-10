@@ -4,15 +4,18 @@ import {
   useNavigationContext,
 } from "../../hooks/Navigation";
 import "./App.css";
+import { FinancialsProvider } from "../../hooks/Financials";
 
 function App() {
   return (
-    <NavigationProvider>
-      <div className="App">
-        <Sidebar />
-        <PageComponent />
-      </div>
-    </NavigationProvider>
+    <FinancialsProvider>
+      <NavigationProvider>
+        <div className="App">
+          <Sidebar />
+          <PageComponent />
+        </div>
+      </NavigationProvider>
+    </FinancialsProvider>
   );
 }
 

@@ -1,24 +1,31 @@
 import { collapseTextChangeRangesAcrossMultipleVersions } from "typescript";
-import { Budget, Transaction } from "../../types/types";
+import { ReactComponent as CircleX } from "../../assets/images/icon-close-modal.svg";
+import { Budget, BudgetCategory, Theme, Transaction } from "../../types/types";
 import {
   AmountWithLabel,
   Card,
+  CardHeader,
   Circle,
   ColorBar,
   Divider,
   formatCurrency,
   Intersperse,
+  MoneyInput,
   PieChart,
+  Select,
+  useDialog,
 } from "../utility/Utility";
 import "./Budget.css";
-import { useFinancials } from "../../hooks/useFinancials";
+import { useFinancialsContext } from "../../hooks/Financials";
 import { TransactionEntry } from "../Transactions/TransactionEntry";
 
 export const Budgets = (): JSX.Element => {
-  const { budgets, categorizedTransactions } = useFinancials();
+  const { budgets, categorizedTransactions } = useFinancialsContext();
   return (
     <div className="budgets-page">
-      <span>Budgets</span>
+      <span>
+        Budgets <AddNewBudgetButton />
+      </span>
       <SpendingSummaryCard budgets={budgets} />
       {budgets.map((b, ix) => (
         <BudgetCard
@@ -28,6 +35,80 @@ export const Budgets = (): JSX.Element => {
         />
       ))}
     </div>
+  );
+};
+
+const AddNewBudgetButton = () => {
+  const { Dialog, close, open } = useDialog();
+  return (
+    <>
+      <Card className="add-new-budget-button" onClick={open}>
+        + Add New Budget
+      </Card>
+      <Dialog>
+        <AddNewBudgetCard close={close} />
+      </Dialog>
+    </>
+  );
+};
+
+const AddNewBudgetCard = ({ close }: { close: () => void }) => {
+  const { budgets } = useFinancialsContext();
+  const usedCategories = new Set<BudgetCategory>(
+    budgets.map((b) => b.category)
+  );
+  const unusedCategories = (
+    Object.values(BudgetCategory) as BudgetCategory[]
+  ).filter((c) => !usedCategories.has(c));
+
+  return (
+    <Card id={"new-budget-dialog"}>
+      <CardHeader
+        title={"Add New Budget"}
+        actionButton={
+          <div
+            className={"close-new-budget-button"}
+            onClick={close}
+            onKeyDown={(e) => e.key === "Enter" && close()}
+            tabIndex={1}
+            autoFocus
+          >
+            <CircleX />
+          </div>
+        }
+      />
+      <span>
+        Choose a category to set a spending budget. These categories can help
+        you monitor spending.
+      </span>
+      <Select
+        title={"Budget Category"}
+        options={unusedCategories.map((c) => ({
+          value: c,
+          render: <>{c}</>,
+        }))}
+      />
+      <MoneyInput title={"Maximum Spend"} />
+
+      <Select
+        title={"Theme"}
+        options={Object.entries(Theme).map(([colorName, color], ix) => ({
+          value: color,
+          render: (
+            <div
+              key={`new-budget-color-${ix}`}
+              style={{ display: "flex", gap: "10px" }}
+            >
+              <Circle color={color} />
+              {colorName}
+            </div>
+          ),
+        }))}
+      />
+      <Card className="confirm-add-budget-button">
+        <span>Add Budget</span>
+      </Card>
+    </Card>
   );
 };
 

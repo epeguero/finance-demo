@@ -1,7 +1,7 @@
 .card {
   display: grid;
   background-color: white;
-  border-radius: 0.75rem;
+  border-radius: 0.5rem;
   padding: 1.5rem 1.5rem 1.5rem 1.5rem;
   > span:nth-of-type(1) {
     font-weight: bold;
@@ -20,6 +20,124 @@
   }
 }
 
+.select {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 5px;
+  span {
+    color: grey;
+    font-size: 0.55rem;
+  }
+  .ul {
+    display: grid;
+    position: relative;
+    flex: 1 0 auto;
+    height: 35px;
+    border-color: grey;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 0.5rem;
+    transition: all 400ms linear;
+    svg {
+      height: 10px;
+      width: 10px;
+      padding-right: 10px;
+    }
+    .selection {
+      display: flex;
+      align-items: center;
+      padding-left: 15px;
+      font-size: 0.7rem;
+      font-weight: lighter;
+      > :nth-child(1) {
+        flex: 1 0 auto;
+        flex: 1 0 auto;
+      }
+    }
+    ul {
+      position: absolute;
+      width: 100%;
+      z-index: 9999;
+      transition:
+        opacity 400ms linear,
+        display 400ms allow-discrete;
+      top: 50px;
+      background-color: transparent;
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      .card {
+        max-height: 180px;
+        overflow-y: scroll;
+        box-shadow: 2px 2px 5px 3px rgba(0, 0, 0, 0.2);
+        padding: 0px;
+        li {
+          padding: 10px 1.5rem 5px 1.5rem;
+          font-size: 0.7rem;
+          font-weight: lighter;
+          > * {
+            padding-left: 2px;
+          }
+          &:hover {
+            background-color: lightblue;
+          }
+        }
+      }
+    }
+    ul[data-open="false"] {
+      opacity: 0;
+      display: none;
+    }
+    ul[data-open="true"] {
+      opacity: 1;
+      @starting-style {
+        opacity: 0;
+      }
+    }
+  }
+  .ul:hover {
+    border-color: black;
+  }
+}
+
+.money-input {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  > span {
+    color: grey;
+    font-size: 0.55rem;
+  }
+  input {
+    flex: 1 0 auto;
+    position: relative;
+    padding-left: 30px;
+    height: 35px;
+    border-radius: 0.5rem;
+    border-width: 1px;
+  }
+  input::placeholder {
+    position: absolute;
+    font-size: 0.7rem;
+    color: gray;
+    top: 11px;
+    transition: color 0.4s ease;
+  }
+  &:hover input::placeholder {
+    color: black;
+  }
+  &::after {
+    position: absolute;
+    content: "";
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23999999'%3E%3Cpath d='M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z'/%3E%3C/svg%3E");
+    width: 15px;
+    height: 15px;
+    inset: 25px auto auto 10px;
+  }
+}
+
 .caret-link {
   display: flex;
   gap: 15px;
@@ -34,13 +152,12 @@
       transition: fill 0.2s ease;
     }
   }
-}
-
-.caret-link:hover {
-  color: black;
-  svg {
-    path {
-      fill: black;
+  &:hover {
+    color: black;
+    svg {
+      path {
+        fill: black;
+      }
     }
   }
 }
@@ -77,6 +194,34 @@
 .colorbar {
   width: 4px;
   border-radius: 1rem;
+}
+
+dialog {
+  overflow: visible;
+  outline: none;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  background-color: transparent;
+  opacity: 1;
+  transition: opacity 500ms linear;
+  @starting-style {
+    opacity: 0;
+  }
+}
+
+dialog[data-open="false"] {
+  opacity: 0;
+}
+
+dialog[data-open="false"]::backdrop {
+  opacity: 0;
+}
+
+dialog::backdrop {
+  opacity: 0.5;
+  background-color: black;
+  transition: opacity 500ms linear;
 }
 
 .divider {

@@ -1,3 +1,4 @@
+import React, { createContext, PropsWithChildren, useContext } from "react";
 import {
   createBudget,
   transactionsByCategory,
@@ -10,6 +11,7 @@ import {
   BillsSummary,
   BudgetMeta,
   CategorizedTransactions,
+  BudgetCategory,
 } from "../types/types";
 
 const pots: Pot[] = [
@@ -20,10 +22,10 @@ const pots: Pot[] = [
 ];
 
 const budgetMetas: BudgetMeta[] = [
-  { category: "Entertainment", maximum: 4000, theme: "darkgreen" },
-  { category: "Bills", maximum: 5000, theme: "paleturquoise" },
-  { category: "Dining Out", maximum: 1000, theme: "moccasin" },
-  { category: "Personal Care", maximum: 300, theme: "dimgrey" },
+  { category: BudgetCategory.Entertainment, maximum: 4000, theme: "darkgreen" },
+  { category: BudgetCategory.Bills, maximum: 5000, theme: "paleturquoise" },
+  { category: BudgetCategory.DiningOut, maximum: 1000, theme: "moccasin" },
+  { category: BudgetCategory.PersonalCare, maximum: 300, theme: "dimgrey" },
 ];
 
 const billsSummary: BillsSummary = {
@@ -32,13 +34,19 @@ const billsSummary: BillsSummary = {
   "Due Soon": 59.98,
 };
 
-export const useFinancials: () => {
+type Financials = {
   pots: Pot[];
   budgets: Budget[];
   transactions: Transaction[];
   billsSummary: BillsSummary;
   categorizedTransactions: CategorizedTransactions;
-} = () => {
+};
+
+const FinancialsContext = createContext<undefined | Financials>(undefined);
+
+export const FinancialsProvider: React.FC<PropsWithChildren> = ({
+  children,
+}) => {
   const categorizedTransactions = transactionsByCategory(transactions);
   const budgetMaxes = budgetMetas.reduce<Record<string, number>>(
     (acc, b) => ({ ...acc, [b.category]: b.maximum }),
@@ -61,11 +69,25 @@ export const useFinancials: () => {
     createBudget(b, remainingBudgets[b.category])
   );
 
-  return {
+  const financials = {
     pots,
     budgets,
     transactions,
     categorizedTransactions,
     billsSummary,
   };
+
+  return (
+    <FinancialsContext.Provider value={financials}>
+      {children}
+    </FinancialsContext.Provider>
+  );
+};
+
+export const useFinancialsContext = () => {
+  const context = useContext(FinancialsContext);
+  if (context === undefined) {
+    throw new Error("useNavigation must be used within a NavigationProvider");
+  }
+  return context;
 };
